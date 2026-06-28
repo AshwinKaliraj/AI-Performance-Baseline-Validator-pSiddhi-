@@ -1,11 +1,9 @@
 from fastapi import FastAPI
+from app.routers import health
 
-app=FastAPI()
+app=FastAPI(
+    title="AI Performance Baseline Validator",
+    version="1.0.0"
+)
 
-@app.get("/")
-def home():
-    return {"message":"Welcome to AI Performance Baseline Validator"}
-
-@app.get("/health")
-def health():
-    return {"status":"healthy"}
+app.include_router(health.router)
