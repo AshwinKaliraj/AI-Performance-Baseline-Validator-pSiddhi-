@@ -1,0 +1,53 @@
+Process Update – Docker Engine Environment Setup
+
+Date: 30-06-2026
+
+Objective
+
+Configure a Linux-based Docker Engine environment using WSL2 (Ubuntu) to support the containerized deployment of the AI Performance Baseline Validator project as per the proposed architecture.
+
+Activities Performed
+Installed Ubuntu 24.04.1 LTS through Microsoft Store.
+Verified WSL2 installation and Ubuntu environment.
+Updated Ubuntu package repositories using sudo apt update.
+Installed the required Docker prerequisites.
+Added Docker's official GPG key.
+Configured the official Docker APT repository.
+Refreshed package repositories.
+Installed Docker Engine, Docker CLI, Containerd, Buildx Plugin, and Docker Compose Plugin.
+Verified Docker installation using docker --version.
+Verified Docker Compose installation using docker compose version.
+Verified Docker daemon status using docker info.
+Successfully executed the Docker Hello World container using docker run hello-world.
+Commands Executed
+sudo apt update
+
+sudo apt install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+docker --version
+
+docker compose version
+
+docker info
+
+docker run hello-world
+Outcome
+Successfully configured Ubuntu 24.04.1 LTS on WSL2.
+Successfully installed Docker Engine without Docker Desktop.
+Docker daemon is running successfully.
+Docker Compose is available and operational.
+Successfully pulled and executed the Hello World container from Docker Hub.
+The environment is now ready for containerizing the FastAPI application and deploying Prometheus and Grafana containers.
