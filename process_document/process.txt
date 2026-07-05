@@ -51,3 +51,41 @@ Docker daemon is running successfully.
 Docker Compose is available and operational.
 Successfully pulled and executed the Hello World container from Docker Hub.
 The environment is now ready for containerizing the FastAPI application and deploying Prometheus and Grafana containers.
+
+
+
+FastAPI Containerization
+
+Objective
+
+Containerize the FastAPI application using Docker Engine to ensure consistent deployment across environments.
+
+Activities Performed
+
+Created a Dockerfile for the FastAPI application.
+Selected the Python 3.13 Slim base image.
+Configured the working directory inside the container.
+Copied project files into the Docker image.
+Installed project dependencies using requirements.txt.
+Exposed port 8000 for FastAPI.
+Configured Uvicorn as the container startup command.
+Built the Docker image successfully.
+Created and started a Docker container.
+Verified application accessibility through Swagger UI.
+
+Commands Executed
+
+docker build -t ai-performance-validator .
+
+docker images
+
+docker run -d -p 8000:8000 --name ai-validator ai-performance-validator
+
+docker ps
+
+Outcome
+
+Successfully built the Docker image.
+Successfully launched the FastAPI application inside a Docker container.
+Verified the application using Swagger UI at http://localhost:8000/docs.
+
