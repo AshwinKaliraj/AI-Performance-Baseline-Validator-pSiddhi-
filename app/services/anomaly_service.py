@@ -2,39 +2,44 @@ import statistics
 
 from app.services import history_service
 
+from app.utils.prometheus_metrics import ANOMALY_Z_SCORE
+
 
 def detect_anomaly(current_value):
 
-    historical_response_times=history_service.get_history()
+    historical_response_times = history_service.get_history()
 
-    moving_average=statistics.mean(historical_response_times)
+    moving_average = statistics.mean(historical_response_times)
 
-    standard_deviation=statistics.stdev(historical_response_times)
+    standard_deviation = statistics.stdev(historical_response_times)
 
-    if standard_deviation==0:
-        z_score=0
+    if standard_deviation == 0:
+        z_score = 0
     else:
-        z_score=round((current_value-moving_average)/standard_deviation,2)
+        z_score = round((current_value - moving_average) / standard_deviation, 2)
 
-    if abs(z_score)<2:
-        status="Normal"
+    if abs(z_score) < 2:
+        status = "Normal"
 
-    elif abs(z_score)<3:
-        status="Warning"
+    elif abs(z_score) < 3:
+        status = "Warning"
 
     else:
-        status="Anomaly"
+        status = "Anomaly"
 
-    return{
+    # Update Prometheus Metric
+    ANOMALY_Z_SCORE.set(z_score)
 
-        "current_value":current_value,
+    return {
 
-        "moving_average":round(moving_average,2),
+        "current_value": current_value,
 
-        "standard_deviation":round(standard_deviation,2),
+        "moving_average": round(moving_average, 2),
 
-        "z_score":z_score,
+        "standard_deviation": round(standard_deviation, 2),
 
-        "status":status
+        "z_score": z_score,
+
+        "status": status
 
     }

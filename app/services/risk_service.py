@@ -2,48 +2,71 @@ import statistics
 
 from app.services import history_service
 
+from app.utils.prometheus_metrics import RISK_SCORE
+
 
 def calculate_risk(current_value):
 
-    historical_response_times=history_service.get_history()
+    historical_response_times = history_service.get_history()
 
-    moving_average=statistics.mean(historical_response_times)
+    moving_average = statistics.mean(historical_response_times)
 
-    standard_deviation=statistics.stdev(historical_response_times)
+    standard_deviation = statistics.stdev(historical_response_times)
 
-    if standard_deviation==0:
-        z_score=0
+    if standard_deviation == 0:
+        z_score = 0
     else:
-        z_score=round((current_value-moving_average)/standard_deviation,2)
+        z_score = round((current_value - moving_average) / standard_deviation, 2)
 
-    if abs(z_score)<2:
-        risk_score=20
-        risk_level="Low"
+    if abs(z_score) < 2:
+        risk_score = 20
+        risk_level = "Low"
 
-    elif abs(z_score)<3:
-        risk_score=60
-        risk_level="Medium"
+    elif abs(z_score) < 3:
+        risk_score = 60
+        risk_level = "Medium"
 
-    elif abs(z_score)<4:
-        risk_score=85
-        risk_level="High"
+    elif abs(z_score) < 4:
+        risk_score = 85
+        risk_level = "High"
 
     else:
-        risk_score=100
-        risk_level="Critical"
+        risk_score = 100
+        risk_level = "Critical"
 
-    return{
+    # -----------------------------
+    # Debug
+    # -----------------------------
 
-        "current_value":current_value,
+    print("========== RISK ==========")
+    print("Current Value      :", current_value)
+    print("Moving Average     :", round(moving_average, 2))
+    print("Standard Deviation :", round(standard_deviation, 2))
+    print("Z Score            :", z_score)
+    print("Risk Score         :", risk_score)
+    print("Risk Level         :", risk_level)
 
-        "moving_average":round(moving_average,2),
+    # -----------------------------
+    # Update Prometheus Metric
+    # -----------------------------
 
-        "standard_deviation":round(standard_deviation,2),
+    RISK_SCORE.set(risk_score)
 
-        "z_score":z_score,
+    print("Risk Prometheus Gauge Updated")
+    print("============================")
 
-        "risk_score":risk_score,
+    return {
 
-        "risk_level":risk_level
+        "current_value": current_value,
+
+        "moving_average": round(moving_average, 2),
+
+        "standard_deviation": round(standard_deviation, 2),
+
+        "z_score": z_score,
+
+        "risk_score": risk_score,
+
+        "risk_level": risk_level
 
     }

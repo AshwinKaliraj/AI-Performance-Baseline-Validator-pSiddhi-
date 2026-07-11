@@ -3,65 +3,102 @@ from app.services import anomaly_service
 from app.services import risk_service
 from app.services import validation_service
 
+from app.utils.prometheus_metrics import (
+    BASELINE_MOVING_AVERAGE,
+    BASELINE_STANDARD_DEVIATION,
+    ANOMALY_Z_SCORE,
+    RISK_SCORE,
+    VALIDATION_STATUS
+)
+
 
 def analyze(current_value):
 
-    baseline=baseline_service.calculate_baseline()
+    # Get AI Results
 
-    anomaly=anomaly_service.detect_anomaly(current_value)
+    baseline = baseline_service.calculate_baseline()
 
-    risk=risk_service.calculate_risk(current_value)
+    anomaly = anomaly_service.detect_anomaly(current_value)
 
-    validation=validation_service.validate_performance(current_value)
+    risk = risk_service.calculate_risk(current_value)
 
-    recommendation=generate_recommendation(risk["risk_level"])
+    validation = validation_service.validate_performance(current_value)
 
+    # -----------------------------
+    # Update Prometheus Metrics
+    # -----------------------------
 
-    return{
+    BASELINE_MOVING_AVERAGE.set(
+        baseline["moving_average"]
+    )
 
-        "baseline":baseline,
+    BASELINE_STANDARD_DEVIATION.set(
+        baseline["standard_deviation"]
+    )
 
-        "anomaly":anomaly,
+    ANOMALY_Z_SCORE.set(
+        anomaly["z_score"]
+    )
 
-        "risk":risk,
+    RISK_SCORE.set(
+        risk["risk_score"]
+    )
 
-        "validation":validation,
+    VALIDATION_STATUS.set(
+        1 if validation["validation_status"] == "Pass" else 0
+    )
 
-        "recommendation":recommendation
+    # Recommendation
+
+    recommendation = generate_recommendation(
+        risk["risk_level"]
+    )
+
+    return {
+
+        "baseline": baseline,
+
+        "anomaly": anomaly,
+
+        "risk": risk,
+
+        "validation": validation,
+
+        "recommendation": recommendation
 
     }
 
 
 def generate_recommendation(risk_level):
 
-    if risk_level=="Low":
+    if risk_level == "Low":
 
-        return{
+        return {
 
-            "action":"System is healthy. Continue monitoring."
-
-        }
-
-    elif risk_level=="Medium":
-
-        return{
-
-            "action":"Monitor performance closely."
+            "action": "System is healthy. Continue monitoring."
 
         }
 
-    elif risk_level=="High":
+    elif risk_level == "Medium":
 
-        return{
+        return {
 
-            "action":"Investigate response time and resource utilization."
+            "action": "Monitor performance closely."
+
+        }
+
+    elif risk_level == "High":
+
+        return {
+
+            "action": "Investigate response time and resource utilization."
 
         }
 
     else:
 
-        return{
+        return {
 
-            "action":"Immediate investigation required. Critical anomaly detected."
+            "action": "Immediate investigation required. Critical anomaly detected."
 
         }
