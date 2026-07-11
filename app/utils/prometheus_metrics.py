@@ -1,4 +1,4 @@
-from prometheus_client import Counter, Histogram, Gauge
+from prometheus_client import Counter, Histogram, Gauge  # type: ignore[import]
 
 # -----------------------------
 # HTTP Metrics
