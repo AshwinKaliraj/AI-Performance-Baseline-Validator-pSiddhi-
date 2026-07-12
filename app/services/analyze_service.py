@@ -1,3 +1,5 @@
+from app.services import gemini_service
+from app.services import groq_service
 from app.services import baseline_service
 from app.services import anomaly_service
 from app.services import risk_service
@@ -14,7 +16,9 @@ from app.utils.prometheus_metrics import (
 
 def analyze(current_value):
 
-    # Get AI Results
+    # -----------------------------
+    # Calculate AI Metrics
+    # -----------------------------
 
     baseline = baseline_service.calculate_baseline()
 
@@ -23,6 +27,24 @@ def analyze(current_value):
     risk = risk_service.calculate_risk(current_value)
 
     validation = validation_service.validate_performance(current_value)
+
+    # -----------------------------
+    # Generate AI Explanations
+    # -----------------------------
+
+    gemini_explanation = gemini_service.generate_explanation(
+        baseline,
+        anomaly,
+        risk,
+        validation
+    )
+
+    groq_explanation = groq_service.generate_explanation(
+        baseline,
+        anomaly,
+        risk,
+        validation
+    )
 
     # -----------------------------
     # Update Prometheus Metrics
@@ -48,7 +70,9 @@ def analyze(current_value):
         1 if validation["validation_status"] == "Pass" else 0
     )
 
+    # -----------------------------
     # Recommendation
+    # -----------------------------
 
     recommendation = generate_recommendation(
         risk["risk_level"]
@@ -64,7 +88,11 @@ def analyze(current_value):
 
         "validation": validation,
 
-        "recommendation": recommendation
+        "recommendation": recommendation,
+
+        "gemini_explanation": gemini_explanation,
+
+        "groq_explanation": groq_explanation
 
     }
 
