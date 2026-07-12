@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system performance is currently stable, with a response time of 101 ms which closely aligns with the historical moving average. All validation checks have passed, resulting in a low risk score.\n\nRoot Cause:\nThe stable performance is driven by consistent server resource utilization and optimal database query execution, keeping metrics well within normal statistical boundaries.\n\nImpact:\nThere is zero negative impact on end-users, ensuring a seamless user experience and consistent system availability.\n\nRecommendation:\nContinue monitoring the performance metrics to detect any future anomalies. Maintain current server resource allocations to sustain this baseline. Establish automated alerts for when the Z-score exceeds standard thresholds.",
+    "groq_explanation": "Summary:\nThe system is performing within acceptable limits, with a current response time of 101 ms and a low risk level. The moving average and standard deviation indicate stable response times, with minimal variability.\n\nRoot Cause:\nThere is no apparent root cause for concern, as the z-score is close to zero (-0.1) and the validation status is pass, indicating that the system is operating as expected.\n\nImpact:\nThe current performance metrics do not indicate any significant impact on system users, with response times well within acceptable ranges.\n\nRecommendation:\nContinue to monitor the system's performance metrics to ensure that the response times remain stable and within acceptable limits. No immediate action is required, but regular check-ins will help to identify any potential issues before they become critical."
+}

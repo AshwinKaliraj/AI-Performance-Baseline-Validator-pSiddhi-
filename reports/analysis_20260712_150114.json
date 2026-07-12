@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently operating within normal parameters with a response time of 101 ms. Performance metrics indicate a low risk level with a passing validation status.\n\nRoot Cause:\nThe system is highly stable, and the minor variance from the moving average is negligible and well within normal statistical deviation.\n\nImpact:\nThere is zero negative impact on users, ensuring a fast, reliable experience and consistent application availability.\n\nRecommendation:\nContinue to monitor system performance at regular intervals to maintain this baseline. Establish alert thresholds for when response times exceed the standard deviation. Conduct routine maintenance during off-peak hours to sustain optimal efficiency.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, which is slightly below the moving average of 101.5 ms. The standard deviation is 4.84, indicating minimal variability. The Z-score of -0.1 suggests that the current response time is within normal limits.\n\nRoot Cause:\nThere is no apparent root cause for concern, as the Z-score and risk score indicate that the system is performing within expected parameters.\n\nImpact:\nThe low risk level and passing validation status indicate that the system's performance is not significantly impacting users or operations.\n\nRecommendation:\nNo immediate action is required, as the system's performance is within acceptable limits. Continue to monitor the response time and risk score to ensure that the system remains stable and performs optimally. Regular reviews of performance metrics will help identify potential issues before they become critical."
+}

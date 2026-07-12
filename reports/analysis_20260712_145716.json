@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system performance is currently stable with a response time of 101 ms, which aligns closely with the historical moving average. The risk level remains low with a passing validation status, indicating no immediate anomalies.\n\nRoot Cause:\nThe system is operating under normal load conditions with optimal resource utilization and database efficiency.\n\nImpact:\nUsers will experience fast and consistent page load times, maintaining high satisfaction and ensuring system reliability.\n\nRecommendation:\nContinue routine monitoring to detect any future deviations from the baseline. Periodically review capacity plans as traffic scales to maintain this level of performance.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, which is slightly below the moving average of 101.5 ms. The standard deviation is 4.84, indicating minimal variability. The z-score of -0.1 suggests that the current response time is within the normal range.\n\nRoot Cause:\nThere is no indication of any underlying issues, as the validation status is \"Pass\" and the risk level is \"Low\" with a risk score of 20.\n\nImpact:\nThe current performance metrics do not indicate any significant impact on the system's overall performance.\n\nRecommendation:\nNo immediate action is required, as the performance metrics are within acceptable ranges. Continue to monitor the response time and other performance metrics to ensure that the system remains stable and efficient. Regular reviews of the performance data will help identify any potential issues before they become critical."
+}

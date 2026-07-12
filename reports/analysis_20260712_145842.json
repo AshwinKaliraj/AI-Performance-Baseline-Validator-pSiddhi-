@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe current response time of 101 ms is highly stable and aligns closely with the moving average of 101.5 ms. With a low risk score of 20 and a passing validation status, system performance remains optimal.\n\nRoot Cause:\nThe system is operating under normal, balanced load conditions with healthy resource utilization and efficient database query execution.\n\nImpact:\nUsers will experience fast, seamless interactions, ensuring high satisfaction and maintaining standard operational efficiency.\n\nRecommendation:\nContinue monitoring performance trends to establish a baseline for peak traffic periods. Regularly review system capacity to ensure ongoing stability as user demand grows.",
+    "groq_explanation": "Summary:\nThe current response time of 101 ms is within acceptable limits, with a low risk score of 20 and a low risk level. The moving average of 101.5 ms and standard deviation of 4.84 indicate stable performance. The z-score of -0.1 suggests that the current response time is slightly below the mean, but still within normal bounds.\n\nRoot Cause:\nThere is no apparent root cause for concern, as the validation status is pass and the risk level is low.\n\nImpact:\nThe current performance metrics have a minimal impact on the system, with a low risk score and stable response times.\n\nRecommendation:\nNo immediate action is required, as the system is performing within acceptable limits. However, continued monitoring is recommended to ensure that the response time remains stable and the risk level does not increase."
+}

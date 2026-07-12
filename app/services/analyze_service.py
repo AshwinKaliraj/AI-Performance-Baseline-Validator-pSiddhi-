@@ -4,6 +4,7 @@ from app.services import baseline_service
 from app.services import anomaly_service
 from app.services import risk_service
 from app.services import validation_service
+from app.services import ai_summary_service
 
 from app.utils.prometheus_metrics import (
     BASELINE_MOVING_AVERAGE,
@@ -29,24 +30,6 @@ def analyze(current_value):
     validation = validation_service.validate_performance(current_value)
 
     # -----------------------------
-    # Generate AI Explanations
-    # -----------------------------
-
-    gemini_explanation = gemini_service.generate_explanation(
-        baseline,
-        anomaly,
-        risk,
-        validation
-    )
-
-    groq_explanation = groq_service.generate_explanation(
-        baseline,
-        anomaly,
-        risk,
-        validation
-    )
-
-    # -----------------------------
     # Update Prometheus Metrics
     # -----------------------------
 
@@ -68,6 +51,39 @@ def analyze(current_value):
 
     VALIDATION_STATUS.set(
         1 if validation["validation_status"] == "Pass" else 0
+    )
+
+    # -----------------------------
+    # Generate AI Explanations
+    # -----------------------------
+
+    try:
+        gemini_explanation = gemini_service.generate_explanation(
+            baseline,
+            anomaly,
+            risk,
+            validation
+        )
+    except Exception as e:
+        gemini_explanation = f"Gemini Error: {str(e)}"
+
+    try:
+        groq_explanation = groq_service.generate_explanation(
+            baseline,
+            anomaly,
+            risk,
+            validation
+        )
+    except Exception as e:
+        groq_explanation = f"Groq Error: {str(e)}"
+
+    # -----------------------------
+    # Save Latest AI Analysis
+    # -----------------------------
+
+    ai_summary_service.update(
+        gemini_explanation,
+        groq_explanation
     )
 
     # -----------------------------

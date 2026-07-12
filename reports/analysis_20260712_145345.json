@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently operating at optimal performance with a response time of 101 ms, which aligns closely with the historical moving average. All validation checks have passed, indicating a stable environment with a low risk level.\n\nRoot Cause:\nThe stable response time is driven by efficient system resource utilization and steady traffic volumes, keeping performance well within normal statistical deviations.\n\nImpact:\nThere is zero negative business or technical impact, ensuring a seamless user experience and continued compliance with service level agreements.\n\nRecommendation:\nMaintain the current monitoring configuration to track baseline performance. Establish automated alerts to trigger if the z-score deviates beyond normal thresholds. Conduct routine capacity planning to ensure the infrastructure remains optimized during peak load periods.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, slightly below the moving average of 101.5 ms. The standard deviation is 4.84, indicating moderate variability. The Z-Score is -0.1, suggesting that the current response time is slightly better than average.\n\nRoot Cause:\nNo significant issues are detected, and the validation status is \"Pass\", indicating that the system is functioning within acceptable parameters.\n\nImpact:\nThe low risk score of 20 and \"Low\" risk level indicate that the current performance is not expected to have a significant impact on users or the system.\n\nRecommendation:\nContinue monitoring the system to ensure that the response time remains stable and within acceptable limits. No immediate action is required, but periodic reviews should be performed to identify potential areas for optimization and maintain optimal performance."
+}

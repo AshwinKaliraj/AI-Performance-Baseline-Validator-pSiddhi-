@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently performing optimally with a response time of 101 ms, which aligns closely with its historical moving average of 101.5 ms. The low risk score and passing validation status indicate that the application is stable and healthy.\n\nRoot Cause:\nThe stable performance is driven by consistent user demand, efficient application resource allocation, and the absence of any network or database latency.\n\nImpact:\nThere is zero negative business impact, ensuring a fast, seamless user experience and optimal system resource utilization.\n\nRecommendation:\nContinue to monitor the system under standard operating procedures. Maintain the current infrastructure configuration without making manual adjustments. Schedule routine health checks to ensure ongoing baseline stability.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, which is slightly below the moving average of 101.5 ms. The standard deviation is 4.84, indicating minimal variability in response times. The z-score of -0.1 suggests that the current response time is within a normal range.\n\nRoot Cause:\nThere is no apparent root cause for concern, as the metrics indicate stable and consistent performance.\n\nImpact:\nThe current performance metrics do not indicate any significant impact on system users, with response times remaining relatively constant.\n\nRecommendation:\nNo immediate action is required, as the risk level is low and the validation status is pass. However, it is recommended to continue monitoring the performance metrics to ensure that the system remains stable and responsive. Regular review of these metrics will help identify any potential issues before they become critical."
+}

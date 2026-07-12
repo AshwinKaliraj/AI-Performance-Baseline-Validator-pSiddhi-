@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently operating within normal parameters with a response time of 101 ms, which aligns closely with the moving average. All validation checks have passed, indicating a low-risk performance state.\n\nRoot Cause:\nThe stable performance indicates that system resources are adequately provisioned and current user traffic is well within the capacity limits of the application.\n\nImpact:\nUsers will experience fast and reliable response times, resulting in a positive customer experience and zero negative technical impact.\n\nRecommendation:\nMaintain the current resource allocation and continue routine performance monitoring. Establish baseline thresholds for high-traffic periods to preemptively manage potential load spikes.",
+    "groq_explanation": "Summary: The system's current response time is 101 ms, with a moving average of 101.5 ms, indicating stable performance. The low standard deviation of 4.84 ms suggests minimal variability in response times.\n\nRoot Cause: There is no apparent issue, as the Z-Score of -0.1 is within the acceptable range, and the validation status is pass.\n\nImpact: The system's performance is within normal limits, and no significant impact on users is expected.\n\nRecommendation: Continue to monitor the system's performance metrics, as the risk score of 20 and low risk level indicate a healthy system. No immediate action is required, but ongoing surveillance will help identify potential issues before they become critical."
+}

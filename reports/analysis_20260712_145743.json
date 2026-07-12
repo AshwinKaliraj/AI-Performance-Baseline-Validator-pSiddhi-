@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system performance is currently stable, with a response time of 101 ms that aligns closely with the moving average. The low risk score and passing validation status indicate that the application is operating within normal boundaries.\n\nRoot Cause:\nThe system is functioning under normal load with optimal resource allocation, resulting in a negligible Z-Score of -0.1.\n\nImpact:\nThere is no negative impact on user experience, as the application remains highly responsive and reliable.\n\nRecommendation:\nContinue to monitor the performance metrics to detect any future anomalies. Maintain the current infrastructure configuration since no immediate action is required. Establish baseline benchmarks for upcoming high-traffic periods.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, which is within an acceptable range. The moving average is slightly higher at 101.5 ms, indicating a stable performance trend. The standard deviation is 4.84, suggesting minimal variability in response times.\n\nRoot Cause:\nNo significant issues are detected, as the Z-score is -0.1, indicating that the current response time is within the expected range.\n\nImpact:\nThe low risk score of 20 and low risk level suggest that the current performance has a minimal impact on the system's overall functionality.\n\nRecommendation:\nNo immediate action is required, as the validation status is \"Pass\" and the risk level is low. Continue to monitor the performance metrics to ensure that the response time remains stable and within acceptable limits. Regular review of these metrics will help identify any potential issues before they become critical."
+}

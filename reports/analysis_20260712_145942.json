@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently performing within normal parameters with a response time of 101 ms, which is slightly below the moving average. With a low risk score of 20 and a passed validation status, there are no immediate performance anomalies detected.\n\nRoot Cause:\nThe stable response time and near-zero negative Z-score indicate that system resources and network conditions are optimal and consistent with historical baselines.\n\nImpact:\nThere is no negative business or technical impact as user experience remains fast, and system stability is maintained.\n\nRecommendation:\nContinue monitoring the response times to maintain this healthy baseline. Establish automated alerts for when the Z-score exceeds positive thresholds. Perform routine system health checks to prevent future degradation.",
+    "groq_explanation": "Summary:\nThe current response time of 101 ms is slightly below the moving average of 101.5 ms, with a low standard deviation of 4.84. The z-score of -0.1 indicates a minor deviation from the mean. The risk score of 20 corresponds to a low risk level.\n\nRoot Cause:\nNo significant issues are identified, and the minor deviation from the mean is within acceptable limits.\n\nImpact:\nThe current performance metrics indicate a stable system with minimal risk, and no significant impact on users is expected.\n\nRecommendation:\nNo immediate action is required, but ongoing monitoring is recommended to ensure the system remains within acceptable performance limits. Routine maintenance and checks can help maintain the current performance level and prevent potential issues from arising."
+}

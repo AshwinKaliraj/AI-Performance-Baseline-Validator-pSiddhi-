@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nSystem performance is highly stable with a current response time of 101 ms, aligning closely with the historical moving average. The low risk score and passing validation status indicate healthy application operations under current loads.\n\nRoot Cause:\nThe response time is driven by steady-state system operations and optimal resource utilization, resulting in a negligible z-score of -0.1 that reflects standard baseline performance.\n\nImpact:\nThere is no negative business or technical impact as user experience remains optimal and the system consistently meets established service level agreements.\n\nRecommendation:\nContinue routine performance monitoring to ensure baseline stability persists. Maintain current infrastructure configurations as no interventions are required. Establish automated alerts to flag potential anomalies if the z-score exceeds acceptable thresholds in the future.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, which is slightly below the moving average of 101.5 ms. The standard deviation is 4.84, indicating a relatively stable performance. The z-score of -0.1 suggests that the current response time is within the normal range.\n\nRoot Cause:\nThere is no indication of any significant issues or anomalies, and the validation status is \"Pass\", suggesting that the system is functioning as expected.\n\nImpact:\nThe low risk score of 20 and \"Low\" risk level indicate that the current performance is unlikely to have a significant impact on users or the system.\n\nRecommendation:\nNo immediate action is required, as the performance is within normal parameters. However, continued monitoring is recommended to ensure that the system continues to perform optimally and to quickly identify any potential issues that may arise."
+}

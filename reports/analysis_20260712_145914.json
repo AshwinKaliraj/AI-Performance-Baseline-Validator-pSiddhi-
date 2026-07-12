@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently operating at optimal performance with a stable response time of 101 milliseconds. All metrics indicate a low risk level and successfully pass validation standards.\n\nRoot Cause:\nThe performance remains stable because the current response time aligns closely with the moving average, indicating consistent resource availability and healthy system health.\n\nImpact:\nThere is no negative technical or business impact, ensuring a seamless user experience and continued application reliability.\n\nRecommendation:\nContinue monitoring the current baseline during peak hours to ensure ongoing stability. Implement automated alerts to detect any future deviations exceeding standard thresholds.",
+    "groq_explanation": "Summary:\nThe system's current response time is 101 ms, which is slightly lower than the moving average of 101.5 ms. The standard deviation of 4.84 indicates a relatively stable performance. The z-score of -0.1 suggests that the current response time is within a normal range.\n\nRoot Cause:\nThere is no apparent root cause for concern, as the validation status is \"Pass\" and the risk level is \"Low\".\n\nImpact:\nThe current performance metrics indicate a stable and low-risk system, with no significant impact on users or operations.\n\nRecommendation:\nContinue to monitor the system's performance metrics to ensure that the response time remains within a stable range. No immediate action is required, but it is essential to maintain regular checks to prevent potential issues and ensure optimal system performance."
+}

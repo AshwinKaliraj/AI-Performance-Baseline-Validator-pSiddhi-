@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe current response time of 101 ms is highly stable and aligns closely with the historical moving average. With a low risk score and a passed validation status, overall system performance remains optimal.\n\nRoot Cause:\nThe system is operating under normal load conditions with efficient resource utilization, as evidenced by the negligible Z-score of -0.1 and low standard deviation.\n\nImpact:\nThere is no negative impact on user experience, ensuring consistent application delivery and high service availability for end users.\n\nRecommendation:\nContinue routine monitoring to ensure baseline stability during peak hours. Maintain current system and infrastructure configurations. Schedule regular health checks to proactively detect future performance anomalies.",
+    "groq_explanation": "Summary:\nThe current response time of 101 ms is slightly below the moving average of 101.5 ms, with a minimal deviation indicated by a Z-Score of -0.1. The standard deviation of 4.84 ms suggests stable performance, and the risk score of 20 corresponds to a low risk level.\n\nRoot Cause:\nThere is no apparent significant issue or anomaly in the current performance metrics, as the validation status is pass and the Z-Score is near zero.\n\nImpact:\nThe impact of the current performance is negligible, as the response time is within an acceptable range and the risk level is low.\n\nRecommendation:\nNo immediate action is required, as the system is performing within expected parameters. Continuous monitoring is recommended to ensure that the response time and risk score remain stable, and to quickly identify any potential issues that may arise."
+}

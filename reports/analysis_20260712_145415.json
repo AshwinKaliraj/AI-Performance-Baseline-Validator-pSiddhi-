@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently operating within normal parameters with a response time of 101 ms, which aligns closely with the moving average. With a low risk score of 20 and a negative Z-score, the performance validation status is marked as a pass.\n\nRoot Cause:\nThe stable performance is driven by consistent system load, optimized resource utilization, and the absence of any anomalous network or database latency during this monitoring window.\n\nImpact:\nThere is no negative impact on user experience or system throughput, ensuring high availability and seamless transaction processing for end-users.\n\nRecommendation:\nContinue monitoring the baseline performance metrics to detect future anomalies, schedule routine maintenance during off-peak hours to sustain stability, and conduct periodic stress testing to verify threshold limits.",
+    "groq_explanation": "Summary:\nThe performance metrics indicate a stable and low-risk system with a current response time of 101 ms, which is close to the moving average of 101.5 ms. The standard deviation of 4.84 ms suggests minimal variability in response times.\n\nRoot Cause:\nThere is no significant anomaly or issue detected, as the Z-Score of -0.1 is within an acceptable range, indicating that the current response time is not significantly different from the average.\n\nImpact:\nThe low risk score of 20 and low risk level suggest that the system is functioning as expected, with minimal impact on users or operations.\n\nRecommendation:\nNo immediate action is required, as the validation status is \"Pass\" and the system is performing within expected parameters. Continue to monitor the metrics to ensure the system remains stable and identify any potential issues before they become critical."
+}

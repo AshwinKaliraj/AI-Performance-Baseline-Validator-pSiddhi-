@@ -1,0 +1,36 @@
+{
+    "baseline": {
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "current_value": 101,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "anomaly": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "status": "Normal"
+    },
+    "risk": {
+        "current_value": 101,
+        "moving_average": 101.5,
+        "standard_deviation": 4.84,
+        "z_score": -0.1,
+        "risk_score": 20,
+        "risk_level": "Low"
+    },
+    "validation": {
+        "current_value": 101,
+        "z_score": -0.1,
+        "risk_level": "Low",
+        "validation_status": "Pass",
+        "message": "Performance is within the acceptable baseline."
+    },
+    "recommendation": {
+        "action": "System is healthy. Continue monitoring."
+    },
+    "gemini_explanation": "Summary:\nThe system is currently operating within normal parameters with a response time of 101 ms, which closely aligns with the historical moving average. With a low risk score of 20 and a passed validation status, the application is performing optimally.\n\nRoot Cause:\nThe stable performance is driven by consistent transaction volumes, efficient database execution, and healthy system resource utilization.\n\nImpact:\nEnd users will experience fast, seamless interactions, which maintains high satisfaction and prevents any negative business revenue impact.\n\nRecommendation:\nContinue active monitoring to maintain this baseline, schedule routine health checks during off-peak hours, and review capacity planning for upcoming traffic surges.",
+    "groq_explanation": "Summary:\nThe current response time is 101 ms, which is slightly below the moving average of 101.5 ms. The standard deviation is 4.84, indicating a relatively stable performance. The z-score of -0.1 suggests that the current response time is within the normal range.\n\nRoot Cause:\nThere is no indication of a significant issue, as the validation status is \"Pass\" and the risk level is \"Low\". The current response time is close to the moving average, suggesting that the system is performing as expected.\n\nImpact:\nThe current performance metrics do not indicate a significant impact on the system or users, as the response time is relatively stable and within the normal range.\n\nRecommendation:\nNo immediate action is required, as the risk level is \"Low\" and the validation status is \"Pass\". However, it is recommended to continue monitoring the performance metrics to ensure that the system remains stable and responsive."
+}

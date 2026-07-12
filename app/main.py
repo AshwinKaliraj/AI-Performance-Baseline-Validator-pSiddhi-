@@ -12,7 +12,8 @@ from app.routers import (
     risk,
     validation,
     analyze,
-    history
+    history,
+    ai_analysis
 )
 
 from app.utils.prometheus_metrics import (
@@ -72,3 +73,4 @@ app.include_router(risk.router)
 app.include_router(validation.router)
 app.include_router(analyze.router)
 app.include_router(history.router)
+app.include_router(ai_analysis.router)
