@@ -1,0 +1,15 @@
+azure-functions
+
+python-dotenv
+
+google-genai
+
+groq
+
+fastapi
+
+pydantic
+
+prometheus_client
+
+psutil
