@@ -5,6 +5,7 @@ from app.services import anomaly_service
 from app.services import risk_service
 from app.services import validation_service
 from app.services import ai_summary_service
+from app.services import history_service
 
 from app.utils.prometheus_metrics import (
     BASELINE_MOVING_AVERAGE,
@@ -28,6 +29,20 @@ def analyze(current_value):
     risk = risk_service.calculate_risk(current_value)
 
     validation = validation_service.validate_performance(current_value)
+
+    # -----------------------------
+    # Store Historical Analysis
+    # -----------------------------
+
+    history_service.add_analysis_record(
+        response_time=current_value,
+        moving_average=baseline["moving_average"],
+        standard_deviation=baseline["standard_deviation"],
+        z_score=anomaly["z_score"],
+        risk_score=risk["risk_score"],
+        risk_level=risk["risk_level"],
+        validation_status=validation["validation_status"]
+    )
 
     # -----------------------------
     # Update Prometheus Metrics
@@ -58,33 +73,30 @@ def analyze(current_value):
     # -----------------------------
 
     try:
+
         gemini_explanation = gemini_service.generate_explanation(
             baseline,
             anomaly,
             risk,
             validation
         )
+
     except Exception as e:
+
         gemini_explanation = f"Gemini Error: {str(e)}"
 
     try:
+
         groq_explanation = groq_service.generate_explanation(
             baseline,
             anomaly,
             risk,
             validation
         )
+
     except Exception as e:
+
         groq_explanation = f"Groq Error: {str(e)}"
-
-    # -----------------------------
-    # Save Latest AI Analysis
-    # -----------------------------
-
-    ai_summary_service.update(
-        gemini_explanation,
-        groq_explanation
-    )
 
     # -----------------------------
     # Recommendation
@@ -93,6 +105,24 @@ def analyze(current_value):
     recommendation = generate_recommendation(
         risk["risk_level"]
     )
+
+    # -----------------------------
+    # Save Latest AI Analysis
+    # -----------------------------
+
+    ai_summary_service.update(
+        baseline=baseline,
+        anomaly=anomaly,
+        risk=risk,
+        validation=validation,
+        recommendation=recommendation,
+        gemini=gemini_explanation,
+        groq=groq_explanation
+    )
+
+    # -----------------------------
+    # Return Response
+    # -----------------------------
 
     return {
 
@@ -118,31 +148,23 @@ def generate_recommendation(risk_level):
     if risk_level == "Low":
 
         return {
-
             "action": "System is healthy. Continue monitoring."
-
         }
 
     elif risk_level == "Medium":
 
         return {
-
             "action": "Monitor performance closely."
-
         }
 
     elif risk_level == "High":
 
         return {
-
             "action": "Investigate response time and resource utilization."
-
         }
 
     else:
 
         return {
-
             "action": "Immediate investigation required. Critical anomaly detected."
-
         }

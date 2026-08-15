@@ -1,24 +1,43 @@
 from fastapi import APIRouter
 
-from app.models.history import HistoryRequest,HistoryResponse
+from app.models.history import (
+    HistoryRequest,
+    HistoryResponse
+)
 
 from app.services import history_service
 
-router=APIRouter(
+
+router = APIRouter(
     prefix="/history",
     tags=["Performance History"]
 )
 
 
-@router.post("/",response_model=HistoryResponse)
+@router.post(
+    "/",
+    response_model=HistoryResponse
+)
+def add_history(request: HistoryRequest):
 
-def add_history(request:HistoryRequest):
-
-    return history_service.add_history(request.response_time)
+    return history_service.add_history(
+        request.response_time
+    )
 
 
 @router.get("/")
-
 def get_history():
 
     return history_service.get_history()
+
+
+@router.get("/analysis")
+def get_analysis_history():
+
+    return history_service.get_analysis_history()
+
+
+@router.get("/deviations")
+def get_deviation_history():
+
+    return history_service.get_deviation_history()
