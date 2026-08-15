@@ -17,6 +17,7 @@ from app.routers import (
 )
 
 from app.services import history_service
+from app.services import mlflow_service
 
 from app.utils.prometheus_metrics import (
     REQUEST_COUNT,
@@ -36,6 +37,21 @@ app = FastAPI(
 # -----------------------------
 
 history_service.initialize_database()
+
+
+# -----------------------------
+# Initialize MLflow
+# -----------------------------
+
+try:
+
+    mlflow_service.initialize()
+
+except Exception as e:
+
+    print(
+        f"MLflow initialization error: {str(e)}"
+    )
 
 
 # -----------------------------
@@ -72,7 +88,10 @@ async def prometheus_middleware(
 
     finally:
 
-        duration = time.perf_counter() - start_time
+        duration = (
+            time.perf_counter()
+            - start_time
+        )
 
         REQUEST_LATENCY.labels(
             method=request.method,
@@ -84,26 +103,50 @@ async def prometheus_middleware(
 # Register Routers
 # -----------------------------
 
-app.include_router(health.router)
+app.include_router(
+    health.router
+)
 
-app.include_router(user.router)
+app.include_router(
+    user.router
+)
 
-app.include_router(payment.router)
+app.include_router(
+    payment.router
+)
 
-app.include_router(order.router)
+app.include_router(
+    order.router
+)
 
-app.include_router(metrics.router)
+app.include_router(
+    metrics.router
+)
 
-app.include_router(baseline.router)
+app.include_router(
+    baseline.router
+)
 
-app.include_router(anomaly.router)
+app.include_router(
+    anomaly.router
+)
 
-app.include_router(risk.router)
+app.include_router(
+    risk.router
+)
 
-app.include_router(validation.router)
+app.include_router(
+    validation.router
+)
 
-app.include_router(analyze.router)
+app.include_router(
+    analyze.router
+)
 
-app.include_router(history.router)
+app.include_router(
+    history.router
+)
 
-app.include_router(ai_analysis.router)
+app.include_router(
+    ai_analysis.router
+)

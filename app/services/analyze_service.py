@@ -6,6 +6,7 @@ from app.services import risk_service
 from app.services import validation_service
 from app.services import ai_summary_service
 from app.services import history_service
+from app.services import mlflow_service
 
 from app.utils.prometheus_metrics import (
     BASELINE_MOVING_AVERAGE,
@@ -43,6 +44,28 @@ def analyze(current_value):
         risk_level=risk["risk_level"],
         validation_status=validation["validation_status"]
     )
+
+    # -----------------------------
+    # Log Analysis to MLflow
+    # -----------------------------
+
+    try:
+
+        mlflow_service.log_analysis(
+            response_time=current_value,
+            moving_average=baseline["moving_average"],
+            standard_deviation=baseline["standard_deviation"],
+            z_score=anomaly["z_score"],
+            risk_score=risk["risk_score"],
+            risk_level=risk["risk_level"],
+            validation_status=validation["validation_status"]
+        )
+
+    except Exception as e:
+
+        print(
+            f"MLflow logging error: {str(e)}"
+        )
 
     # -----------------------------
     # Update Prometheus Metrics
@@ -83,7 +106,9 @@ def analyze(current_value):
 
     except Exception as e:
 
-        gemini_explanation = f"Gemini Error: {str(e)}"
+        gemini_explanation = (
+            f"Gemini Error: {str(e)}"
+        )
 
     try:
 
@@ -96,7 +121,9 @@ def analyze(current_value):
 
     except Exception as e:
 
-        groq_explanation = f"Groq Error: {str(e)}"
+        groq_explanation = (
+            f"Groq Error: {str(e)}"
+        )
 
     # -----------------------------
     # Recommendation
