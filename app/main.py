@@ -3,9 +3,6 @@ import time
 
 from app.routers import (
     health,
-    user,
-    payment,
-    order,
     metrics,
     baseline,
     anomaly,
@@ -108,17 +105,7 @@ app.include_router(
     health.router
 )
 
-app.include_router(
-    user.router
-)
 
-app.include_router(
-    payment.router
-)
-
-app.include_router(
-    order.router
-)
 
 app.include_router(
     metrics.router
