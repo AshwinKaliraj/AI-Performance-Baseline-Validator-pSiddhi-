@@ -6,7 +6,6 @@ from app.services import risk_service
 from app.services import validation_service
 from app.services import ai_summary_service
 from app.services import history_service
-from app.services import mlflow_service
 
 from app.utils.prometheus_metrics import (
     BASELINE_MOVING_AVERAGE,
@@ -23,13 +22,21 @@ def analyze(current_value):
     # Calculate AI Metrics
     # -----------------------------
 
-    baseline = baseline_service.calculate_baseline()
+    baseline = baseline_service.calculate_baseline(
+        current_value
+    )
 
-    anomaly = anomaly_service.detect_anomaly(current_value)
+    anomaly = anomaly_service.detect_anomaly(
+        current_value
+    )
 
-    risk = risk_service.calculate_risk(current_value)
+    risk = risk_service.calculate_risk(
+        current_value
+    )
 
-    validation = validation_service.validate_performance(current_value)
+    validation = validation_service.validate_performance(
+        current_value
+    )
 
     # -----------------------------
     # Store Historical Analysis
@@ -44,28 +51,6 @@ def analyze(current_value):
         risk_level=risk["risk_level"],
         validation_status=validation["validation_status"]
     )
-
-    # -----------------------------
-    # Log Analysis to MLflow
-    # -----------------------------
-
-    try:
-
-        mlflow_service.log_analysis(
-            response_time=current_value,
-            moving_average=baseline["moving_average"],
-            standard_deviation=baseline["standard_deviation"],
-            z_score=anomaly["z_score"],
-            risk_score=risk["risk_score"],
-            risk_level=risk["risk_level"],
-            validation_status=validation["validation_status"]
-        )
-
-    except Exception as e:
-
-        print(
-            f"MLflow logging error: {str(e)}"
-        )
 
     # -----------------------------
     # Update Prometheus Metrics
@@ -88,7 +73,9 @@ def analyze(current_value):
     )
 
     VALIDATION_STATUS.set(
-        1 if validation["validation_status"] == "Pass" else 0
+        1
+        if validation["validation_status"] == "Pass"
+        else 0
     )
 
     # -----------------------------
@@ -97,11 +84,13 @@ def analyze(current_value):
 
     try:
 
-        gemini_explanation = gemini_service.generate_explanation(
-            baseline,
-            anomaly,
-            risk,
-            validation
+        gemini_explanation = (
+            gemini_service.generate_explanation(
+                baseline,
+                anomaly,
+                risk,
+                validation
+            )
         )
 
     except Exception as e:
@@ -112,11 +101,13 @@ def analyze(current_value):
 
     try:
 
-        groq_explanation = groq_service.generate_explanation(
-            baseline,
-            anomaly,
-            risk,
-            validation
+        groq_explanation = (
+            groq_service.generate_explanation(
+                baseline,
+                anomaly,
+                risk,
+                validation
+            )
         )
 
     except Exception as e:

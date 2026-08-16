@@ -10,22 +10,24 @@ from app.utils.prometheus_metrics import (
 )
 
 
-def calculate_baseline():
+def calculate_baseline(current_value):
 
     historical_response_times = history_service.get_history()
 
     if not historical_response_times:
+
         return {
             "moving_average": 0,
             "standard_deviation": 0,
-            "current_value": 0,
+            "current_value": current_value,
             "z_score": 0,
             "status": "Normal"
         }
 
-    current_value = historical_response_times[-1]
+    # -----------------------------
+    # Convert Historical Data
+    # -----------------------------
 
-    # Convert historical response times into a NumPy array
     response_times = np.array(
         historical_response_times,
         dtype=float
@@ -44,13 +46,36 @@ def calculate_baseline():
     # Standard Deviation
     # -----------------------------
 
-    standard_deviation = round(
-        float(np.std(response_times, ddof=1)),
-        2
-    )
+    if len(historical_response_times) > 1:
+
+        standard_deviation = round(
+            float(
+                np.std(
+                    response_times,
+                    ddof=1
+                )
+            ),
+            2
+        )
+
+    else:
+
+        standard_deviation = 0
 
     # -----------------------------
-    # Z-Score using scikit-learn
+    # Scikit-learn Baseline Scaling
+    # -----------------------------
+
+    scaler = StandardScaler()
+
+    scaler.fit(response_times)
+
+    # -----------------------------
+    # Z-Score
+    #
+    # Use the same sample standard
+    # deviation used by the existing
+    # anomaly detection logic.
     # -----------------------------
 
     if standard_deviation == 0:
@@ -59,16 +84,10 @@ def calculate_baseline():
 
     else:
 
-        scaler = StandardScaler()
-
-        scaler.fit(response_times)
-
-        transformed_value = scaler.transform(
-            np.array([[current_value]], dtype=float)
-        )
-
         z_score = round(
-            float(transformed_value[0][0]),
+            (
+                current_value - moving_average
+            ) / standard_deviation,
             2
         )
 
@@ -92,12 +111,38 @@ def calculate_baseline():
     # Debug
     # -----------------------------
 
-    print("========== BASELINE ==========")
-    print("Moving Average      :", moving_average)
-    print("Standard Deviation  :", standard_deviation)
-    print("Current Value       :", current_value)
-    print("Z Score             :", z_score)
-    print("================================")
+    print(
+        "========== BASELINE =========="
+    )
+
+    print(
+        "Moving Average      :",
+        moving_average
+    )
+
+    print(
+        "Standard Deviation  :",
+        standard_deviation
+    )
+
+    print(
+        "Current Value       :",
+        current_value
+    )
+
+    print(
+        "Z Score             :",
+        z_score
+    )
+
+    print(
+        "Status              :",
+        status
+    )
+
+    print(
+        "================================"
+    )
 
     # -----------------------------
     # Update Prometheus Metrics
@@ -111,8 +156,17 @@ def calculate_baseline():
         standard_deviation
     )
 
-    print("Baseline Prometheus Gauges Updated")
-    print("===============================")
+    print(
+        "Baseline Prometheus Gauges Updated"
+    )
+
+    print(
+        "==============================="
+    )
+
+    # -----------------------------
+    # Return Baseline Results
+    # -----------------------------
 
     return {
 
