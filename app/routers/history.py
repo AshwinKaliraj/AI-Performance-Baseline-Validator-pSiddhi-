@@ -41,3 +41,9 @@ def get_analysis_history():
 def get_deviation_history():
 
     return history_service.get_deviation_history()
+
+
+@router.get("/trends")
+def get_trend_analysis():
+
+    return history_service.get_trend_analysis()
