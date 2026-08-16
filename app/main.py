@@ -13,7 +13,8 @@ from app.routers import (
     validation,
     analyze,
     history,
-    ai_analysis
+    ai_analysis,
+      mlflow
 )
 
 from app.services import history_service
@@ -150,3 +151,4 @@ app.include_router(
 app.include_router(
     ai_analysis.router
 )
+app.include_router(mlflow.router)

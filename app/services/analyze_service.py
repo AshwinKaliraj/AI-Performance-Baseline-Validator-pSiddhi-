@@ -6,6 +6,7 @@ from app.services import risk_service
 from app.services import validation_service
 from app.services import ai_summary_service
 from app.services import history_service
+from app.services import mlflow_service
 
 from app.utils.prometheus_metrics import (
     BASELINE_MOVING_AVERAGE,
@@ -44,12 +45,52 @@ def analyze(current_value):
 
     history_service.add_analysis_record(
         response_time=current_value,
-        moving_average=baseline["moving_average"],
-        standard_deviation=baseline["standard_deviation"],
-        z_score=anomaly["z_score"],
-        risk_score=risk["risk_score"],
-        risk_level=risk["risk_level"],
-        validation_status=validation["validation_status"]
+        moving_average=baseline[
+            "moving_average"
+        ],
+        standard_deviation=baseline[
+            "standard_deviation"
+        ],
+        z_score=anomaly[
+            "z_score"
+        ],
+        risk_score=risk[
+            "risk_score"
+        ],
+        risk_level=risk[
+            "risk_level"
+        ],
+        validation_status=validation[
+            "validation_status"
+        ]
+    )
+
+    # -----------------------------
+    # MLflow Baseline Tracking
+    # -----------------------------
+
+    mlflow_result = (
+        mlflow_service.log_analysis(
+            response_time=current_value,
+            moving_average=baseline[
+                "moving_average"
+            ],
+            standard_deviation=baseline[
+                "standard_deviation"
+            ],
+            z_score=anomaly[
+                "z_score"
+            ],
+            risk_score=risk[
+                "risk_score"
+            ],
+            risk_level=risk[
+                "risk_level"
+            ],
+            validation_status=validation[
+                "validation_status"
+            ]
+        )
     )
 
     # -----------------------------
@@ -57,24 +98,34 @@ def analyze(current_value):
     # -----------------------------
 
     BASELINE_MOVING_AVERAGE.set(
-        baseline["moving_average"]
+        baseline[
+            "moving_average"
+        ]
     )
 
     BASELINE_STANDARD_DEVIATION.set(
-        baseline["standard_deviation"]
+        baseline[
+            "standard_deviation"
+        ]
     )
 
     ANOMALY_Z_SCORE.set(
-        anomaly["z_score"]
+        anomaly[
+            "z_score"
+        ]
     )
 
     RISK_SCORE.set(
-        risk["risk_score"]
+        risk[
+            "risk_score"
+        ]
     )
 
     VALIDATION_STATUS.set(
         1
-        if validation["validation_status"] == "Pass"
+        if validation[
+            "validation_status"
+        ] == "Pass"
         else 0
     )
 
@@ -121,7 +172,9 @@ def analyze(current_value):
     # -----------------------------
 
     recommendation = generate_recommendation(
-        risk["risk_level"]
+        risk[
+            "risk_level"
+        ]
     )
 
     # -----------------------------
@@ -154,6 +207,8 @@ def analyze(current_value):
 
         "recommendation": recommendation,
 
+        "mlflow": mlflow_result,
+
         "gemini_explanation": gemini_explanation,
 
         "groq_explanation": groq_explanation
@@ -166,23 +221,34 @@ def generate_recommendation(risk_level):
     if risk_level == "Low":
 
         return {
-            "action": "System is healthy. Continue monitoring."
+            "action": (
+                "System is healthy. "
+                "Continue monitoring."
+            )
         }
 
     elif risk_level == "Medium":
 
         return {
-            "action": "Monitor performance closely."
+            "action": (
+                "Monitor performance closely."
+            )
         }
 
     elif risk_level == "High":
 
         return {
-            "action": "Investigate response time and resource utilization."
+            "action": (
+                "Investigate response time "
+                "and resource utilization."
+            )
         }
 
     else:
 
         return {
-            "action": "Immediate investigation required. Critical anomaly detected."
+            "action": (
+                "Immediate investigation required. "
+                "Critical anomaly detected."
+            )
         }
