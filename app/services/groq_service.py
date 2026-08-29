@@ -3,7 +3,9 @@ import os
 from dotenv import load_dotenv
 from groq import Groq
 
+
 load_dotenv()
+
 
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
@@ -43,13 +45,14 @@ Keep the explanation professional and under 200 words.
 """
 
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="qwen/qwen3.6-27b",
         messages=[
             {
                 "role": "user",
                 "content": prompt
             }
-        ]
+        ],
+        reasoning_format="hidden"
     )
 
     return response.choices[0].message.content.strip()
