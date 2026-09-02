@@ -130,9 +130,8 @@ def analyze(current_value):
     )
 
     # -----------------------------
-    # Generate AI Explanation
-    # Gemini = Primary
-    # Groq = Fallback
+    # Generate AI Explanations
+    # Gemini and Groq run independently
     # -----------------------------
 
     try:
@@ -146,30 +145,29 @@ def analyze(current_value):
             )
         )
 
-        groq_explanation = ""
-
     except Exception as gemini_error:
 
         gemini_explanation = (
             f"Gemini Error: {str(gemini_error)}"
         )
 
-        try:
 
-            groq_explanation = (
-                groq_service.generate_explanation(
-                    baseline,
-                    anomaly,
-                    risk,
-                    validation
-                )
+    try:
+
+        groq_explanation = (
+            groq_service.generate_explanation(
+                baseline,
+                anomaly,
+                risk,
+                validation
             )
+        )
 
-        except Exception as groq_error:
+    except Exception as groq_error:
 
-            groq_explanation = (
-                f"Groq Error: {str(groq_error)}"
-            )
+        groq_explanation = (
+            f"Groq Error: {str(groq_error)}"
+        )
 
     # -----------------------------
     # Recommendation

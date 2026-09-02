@@ -3,6 +3,7 @@ import statistics
 from app.services import history_service
 
 from app.utils.prometheus_metrics import VALIDATION_STATUS
+from app.services.email_service import send_validation_failure_email
 
 
 def validate_performance(current_value):
@@ -44,7 +45,7 @@ def validate_performance(current_value):
     else:
         VALIDATION_STATUS.set(0)
 
-    return {
+    result = {
 
         "current_value": current_value,
 
@@ -57,3 +58,10 @@ def validate_performance(current_value):
         "message": message
 
     }
+
+    # Send email notification for validation failures
+    if validation_status == "Fail":
+        send_validation_failure_email(result)
+
+    return result
+    
