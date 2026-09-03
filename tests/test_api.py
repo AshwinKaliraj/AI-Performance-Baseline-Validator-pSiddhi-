@@ -27,12 +27,26 @@ TEST_HISTORY = [
 mock_history_service.get_history.return_value = TEST_HISTORY
 
 
-# Save the real module if it has already been imported
 real_history_service = sys.modules.get(
     "app.services.history_service"
 )
 
-sys.modules["app.services.history_service"] = mock_history_service
+sys.modules["app.services.history_service"] = (
+    mock_history_service
+)
+
+
+# ---------------------------------------------------------
+# Mock MLflow while importing app.main
+# ---------------------------------------------------------
+
+from app.services import mlflow_service
+
+real_log_analysis = mlflow_service.log_analysis
+
+mlflow_service.log_analysis = (
+    lambda *args, **kwargs: None
+)
 
 
 # ---------------------------------------------------------
@@ -41,29 +55,21 @@ sys.modules["app.services.history_service"] = mock_history_service
 
 from fastapi.testclient import TestClient
 from app.main import app
-from app.services import mlflow_service
 
 
 # ---------------------------------------------------------
-# Restore the real history service
+# Restore real services immediately
 # ---------------------------------------------------------
 
 if real_history_service is not None:
     sys.modules["app.services.history_service"] = (
         real_history_service
-)
+    )
 else:
     del sys.modules["app.services.history_service"]
 
 
-# ---------------------------------------------------------
-# Mock MLflow for API tests
-# ---------------------------------------------------------
-# CI does not have the local MLflow experiment/database.
-# MLflow functionality is tested separately in
-# test_mlflow_service.py.
-
-mlflow_service.log_analysis = lambda *args, **kwargs: None
+mlflow_service.log_analysis = real_log_analysis
 
 
 client = TestClient(app)
@@ -103,7 +109,10 @@ def test_analyze_endpoint():
     assert "risk" in data
     assert "validation" in data
 
-    assert data["validation"]["validation_status"] == "Pass"
+    assert (
+        data["validation"]["validation_status"]
+        == "Pass"
+    )
 
 
 def test_analyze_endpoint_detects_anomaly():
@@ -117,4 +126,8 @@ def test_analyze_endpoint_detects_anomaly():
     data = response.json()
 
     assert data["anomaly"]["status"] == "Anomaly"
-    assert data["validation"]["validation_status"] == "Fail"
+
+    assert (
+        data["validation"]["validation_status"]
+        == "Fail"
+    )
