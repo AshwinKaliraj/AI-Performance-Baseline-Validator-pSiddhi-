@@ -14,6 +14,10 @@ jobs:
   qa:
     runs-on: ubuntu-latest
 
+    env:
+      GEMINI_API_KEY: test-key
+      GROQ_API_KEY: test-key
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
