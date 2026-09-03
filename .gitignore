@@ -21,4 +21,4 @@ Thumbs.db
 reports/
 # SQLite Database
 *.db
-performance_history.db
+performance_history.db.coverage
